@@ -14,6 +14,9 @@ namespace JOIEnergy
 {
     public class Startup
     {
+        // IMPROVEMENT NEEDED: Move magic strings to configuration or constants file
+        // WHAT: Extract these hardcoded strings to appsettings.json or a separate constants class
+        // WHY: Makes the application configurable, easier to maintain, follows DRY principle
         private const string MOST_EVIL_PRICE_PLAN_ID = "price-plan-0";
         private const string RENEWABLES_PRICE_PLAN_ID = "price-plan-1";
         private const string STANDARD_PRICE_PLAN_ID = "price-plan-2";
@@ -28,9 +31,15 @@ namespace JOIEnergy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // IMPROVEMENT NEEDED: Move data generation out of Startup class
+            // WHAT: Create a separate data seeding service or move to Program.cs
+            // WHY: Startup should only configure services, not generate data - violates single responsibility principle
             var readings =
                 GenerateMeterElectricityReadings();
 
+            // IMPROVEMENT NEEDED: Move hardcoded data to configuration or database
+            // WHAT: Extract price plans to appsettings.json or create a data seeding service
+            // WHY: Makes the application configurable, easier to test, follows configuration best practices
             var pricePlans = new List<PricePlan> {
                 new PricePlan{
                     PlanName = MOST_EVIL_PRICE_PLAN_ID,
@@ -52,10 +61,21 @@ namespace JOIEnergy
                 }
             };
 
+            // IMPROVEMENT NEEDED: Update to modern .NET 8 approach
+            // WHAT: Replace AddMvc with AddControllers and AddEndpointsApiExplorer
+            // WHY: AddMvc is deprecated, new approach is more performant and follows current standards
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            
+            // IMPROVEMENT NEEDED: Review service lifetimes
+            // WHAT: Consider if services should be Transient, Scoped, or Singleton based on usage patterns
+            // WHY: Incorrect lifetimes can cause performance issues, memory leaks, or unexpected behavior
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IMeterReadingService, MeterReadingService>();
             services.AddTransient<IPricePlanService, PricePlanService>();
+            
+            // IMPROVEMENT NEEDED: Use proper singleton registration syntax
+            // WHAT: Replace lambda-based registration with direct object registration
+            // WHY: More explicit, easier to read, follows DI best practices
             services.AddSingleton((IServiceProvider arg) => readings);
             services.AddSingleton((IServiceProvider arg) => pricePlans);
             services.AddSingleton((IServiceProvider arg) => SmartMeterToPricePlanAccounts);
@@ -69,9 +89,15 @@ namespace JOIEnergy
                 app.UseDeveloperExceptionPage();
             }
 
+            // IMPROVEMENT NEEDED: Update to modern .NET 8 routing
+            // WHAT: Replace UseMvc with UseRouting and MapControllers
+            // WHY: UseMvc is deprecated, new approach provides better performance and flexibility
             app.UseMvc();
         }
 
+        // IMPROVEMENT NEEDED: Move data generation logic to separate service
+        // WHAT: Create a DataSeedingService or move to Program.cs
+        // WHY: Startup class should focus on configuration, not business logic
         private Dictionary<string, List<ElectricityReading>> GenerateMeterElectricityReadings() {
             var readings = new Dictionary<string, List<ElectricityReading>>();
             var generator = new ElectricityReadingGenerator();
@@ -84,6 +110,9 @@ namespace JOIEnergy
             return readings;
         }
 
+        // IMPROVEMENT NEEDED: Move hardcoded mapping to configuration
+        // WHAT: Extract to appsettings.json or create a configuration service
+        // WHY: Makes the application configurable, easier to maintain, follows configuration best practices
         public Dictionary<string, string> SmartMeterToPricePlanAccounts
         {
             get

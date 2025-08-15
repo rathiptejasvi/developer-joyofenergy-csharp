@@ -1,24 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- IMPROVEMENT NEEDED: Add more project properties for better test configuration -->
+    <!-- WHAT: Add properties like Nullable, TreatWarningsAsErrors, CodeCoverage -->
+    <!-- WHY: Better code quality, enables nullable reference types, test coverage reporting -->
     <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- IMPROVEMENT NEEDED: Update test packages to latest versions -->
+    <!-- WHAT: Update xUnit, Moq, and test SDK to latest stable versions -->
+    <!-- WHY: Latest features, bug fixes, better performance, security updates -->
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageReference Include="xunit" Version="2.6.6" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 <PrivateAssets>all</PrivateAssets>
 </PackageReference>
     <PackageReference Include="Moq" Version="4.20.70" />
+    
+    <!-- IMPROVEMENT NEEDED: Add missing test packages for better testing -->
+    <!-- WHAT: Add FluentAssertions, xUnit.DependencyInjection, Microsoft.NET.Test.Sdk -->
+    <!-- WHY: Better assertions, dependency injection support, modern testing capabilities -->
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JOIEnergy\JOIEnergy.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
+    <!-- IMPROVEMENT NEEDED: Remove compile exclusion and fix broken test -->
+    <!-- WHAT: Remove the Compile Remove for PricePlanServiceTest.cs and fix the broken test -->
+    <!-- WHY: Currently excluded test provides no value, need to fix and enable proper testing -->
     <Compile Remove="PricePlanServiceTest.cs" />
   </ItemGroup>
+  
+  <!-- IMPROVEMENT NEEDED: Add test configuration and code coverage -->
+  <!-- WHAT: Add test configuration, code coverage settings, test categories -->
+  <!-- WHY: Better test organization, code coverage reporting, test execution control -->
+
 </Project>

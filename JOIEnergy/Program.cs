@@ -17,6 +17,9 @@ namespace JOIEnergy
             BuildWebHost(args).Run();
         }
 
+        // IMPROVEMENT NEEDED: Modernize to .NET 8 minimal hosting model
+        // WHAT: Replace WebHost.CreateDefaultBuilder with WebApplication.CreateBuilder
+        // WHY: Better performance, cleaner code, follows current .NET best practices, deprecated approach
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()

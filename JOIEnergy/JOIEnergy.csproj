@@ -1,10 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <!-- IMPROVEMENT NEEDED: Add more project properties for better build configuration -->
+    <!-- WHAT: Add properties like Nullable, ImplicitUsings, TreatWarningsAsErrors -->
+    <!-- WHY: Better code quality, enables nullable reference types, stricter compilation -->
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- IMPROVEMENT NEEDED: Remove empty folder references -->
+    <!-- WHAT: Remove unused folder references that don't contain files -->
+    <!-- WHY: Cleaner project file, prevents confusion, follows .NET best practices -->
     <Folder Include="wwwroot\" />
     <Folder Include="Services\" />
     <Folder Include="Enums\" />
@@ -13,10 +19,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- IMPROVEMENT NEEDED: Update to System.Text.Json and add missing packages -->
+    <!-- WHAT: Replace Newtonsoft.Json with System.Text.Json, add Swagger, validation packages -->
+    <!-- WHY: Better performance, built-in .NET support, modern validation capabilities -->
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    
+    <!-- IMPROVEMENT NEEDED: Add missing packages for modern .NET 8 development -->
+    <!-- WHAT: Add Swashbuckle.AspNetCore, FluentValidation.AspNetCore, Microsoft.AspNetCore.OpenApi -->
+    <!-- WHY: Better API documentation, input validation, modern .NET 8 features -->
   </ItemGroup>
 
   <ItemGroup>
+    <!-- IMPROVEMENT NEEDED: Remove deprecated package reference -->
+    <!-- WHAT: Remove Microsoft.VisualStudio.Web.CodeGeneration.Tools reference -->
+    <!-- WHY: Package is deprecated, not needed for .NET 8, cleaner dependencies -->
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
